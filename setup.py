@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
         name="pyacmi",
-        version='1.0.1',
+        version='1.0.2',
         description="ACMI flight record file parser",
         long_description=long_description,
         long_description_content_type='text/markdown',
