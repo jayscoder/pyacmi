@@ -8,6 +8,7 @@ setup(
         version='1.0.1',
         description="ACMI flight record file parser",
         long_description=long_description,
+        long_description_content_type='text/markdown',
         url='https://github.com/wangtong2015/pyacmi',
         author="Wang Tong",
         author_email="astroboythu@gmail.com",
