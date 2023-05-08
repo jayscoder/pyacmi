@@ -168,3 +168,5 @@ venv
 
 .replit
 poetry.lock
+
+.idea
