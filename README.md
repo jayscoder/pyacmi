@@ -1,6 +1,6 @@
-# pyacmi
+# pyacmi: TacView ACMI FileParser
 
-TacView ACMI FileParser
+[![PyPI Latest Release](https://img.shields.io/pypi/v/pyacmi.svg)](https://pypi.org/project/pyacmi/)
 
 **.acmi is a file used by tacview for creating flight recording from simulators or real world.
 
