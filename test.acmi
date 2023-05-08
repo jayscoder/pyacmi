@@ -1,0 +1,16 @@
+﻿FileType=text/acmi/tacview
+FileVersion=2.1
+0,ReferenceLongitude=40
+0,ReferenceLatitude=42
+0,ReferenceTime=2018-01-21T05:37:35Z
+0,RecordingTime=2023-05-01T02:05:12.741Z
+0,Title=测试Acmi
+0,DataRecorder=DCS2ACMI 0.0.2
+0,DataSource=DCS 0.0.1
+0,Author=wangtong
+3,T=1|2|3|4|5,Type=Navaid+Static+Bullseye,Color=Blue,Coalition=Enemies
+4,T=1|2|3,Type=Navaid+Static+Bullseye,Color=Grey,Coalition=Neutrals
+5,T=1|2|3|4|5,Type=Navaid+Static+Bullseye,Color=Red,Coalition=Allies
+#0.54
+1,T=1|2|3|4|5|6|7|8|9,Type=Air+FixedWing,Color=Red,Coalition=Allies,Name=E-3A,Pilot=AWACS-R-1-1,Group=AWACS-R-1,Country=xr
+2,T=1|2|3|4|5|6|7|8|9,Type=Air+FixedWing,Color=Blue,Coalition=Enemies,Name=E-3A,Pilot=AWACS-B-1-1,Group=AWACS-B-1,Country=xb
