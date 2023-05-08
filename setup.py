@@ -1,10 +1,13 @@
 from setuptools import setup
 
+with open('README.md', 'r', encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
         name="pyacmi",
-        version='1.0.0',
+        version='1.0.1',
         description="ACMI flight record file parser",
-        long_description="ACMI is a file used by tacview for creating flight recording from simulators or real world.",
+        long_description=long_description,
         url='https://github.com/wangtong2015/pyacmi',
         author="Wang Tong",
         author_email="astroboythu@gmail.com",
