@@ -105,7 +105,6 @@ ACMI_EXPORT_CSV_HEADERS = [
     'Tags',
     'Type',
     'Time',
-
     'AdditionalType',
     'Parent',
     'Next',
@@ -610,7 +609,17 @@ class Acmi:
         self.recording_time = None
         self.author = None
         self.title = None
+
+        # Category of the flight/mission:
+        # - Air - to - Air：空中对空战斗任务
+        # - Air - to - Ground：空中对地攻击任务
+        # - Reconnaissance：侦察或侦察任务
+        # - Close air support：提供地面部队近距离空中支援
+        # - Maritime：海上巡逻和攻击任务
+        # - Training：用于教学或练习的任务
+        # - Other：其他任务类型，根据实际情况而定。
         self.category = None
+
         self.briefing = None
         self.debriefing = None
         self.comments = None
@@ -862,7 +871,7 @@ class Acmi:
         dirname = os.path.dirname(filepath)
         if dirname and not os.path.exists(dirname):
             os.makedirs(dirname)
-        
+
         headers = []
         if remove_empty:
             for field in ACMI_EXPORT_CSV_HEADERS:
