@@ -20,7 +20,7 @@ pip install pyacmi
 
 ```python
 
-from pyacmi import *
+from pyacmi import Acmi
 
 acmi = Acmi('test.acmi')
 print(acmi)
