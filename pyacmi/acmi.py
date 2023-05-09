@@ -853,10 +853,10 @@ class Acmi:
     # def export_global_to_json(self, export_filepath: str):
     #     with open(export_filepath, 'w', encoding='utf-8') as f:
     #         json.dump(self.global_json(), f, ensure_ascii=False)
-    
+
     # 导出CSV
     # remove_empty: 是否移除空列，默认移除
-    # export_obj_ids: 选择导出的object ID
+    # export_obj_ids: 选择导出的object ID None表示导出全部ID
     def export_csv(self, filepath: str, remove_empty=True, export_obj_ids: Optional[list[str]] = None):
         # 如果目录不存在，则创建目录
         dirname = os.path.dirname(filepath)
