@@ -8,7 +8,7 @@
 
 The source code is currently hosted on GitHub at: https://github.com/wangtong2015/pyacmi
 
-ACMI file Documentation: [Technical Reference - ACMI flight recordings 2.2](https://www.tacview.net/documentation/acmi/)
+ACMI file documentation: [Technical Reference - ACMI flight recordings 2.2](https://www.tacview.net/documentation/acmi/)
 
 ## Installation
 
