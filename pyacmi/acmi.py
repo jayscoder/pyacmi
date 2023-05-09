@@ -598,17 +598,17 @@ class AcmiFileReader:
 class Acmi:
 
     def __init__(self, filepath: str):
-        self.filepath = filepath
-        self.file_version = None
-        self.file_type = None
+        self.filepath: Optional[str] = filepath
+        self.file_version: Optional[str] = None
+        self.file_type: Optional[str] = None
 
         # global properties
-        self.data_source = None
-        self.data_recorder = None
-        self.reference_time = None
-        self.recording_time = None
-        self.author = None
-        self.title = None
+        self.data_source: Optional[str] = None
+        self.data_recorder: Optional[str] = None
+        self.reference_time: Optional[str] = None
+        self.recording_time: Optional[str] = None
+        self.author: Optional[str] = None
+        self.title: Optional[str] = None
 
         # Category of the flight/mission:
         # - Air - to - Air：空中对空战斗任务
@@ -618,11 +618,11 @@ class Acmi:
         # - Maritime：海上巡逻和攻击任务
         # - Training：用于教学或练习的任务
         # - Other：其他任务类型，根据实际情况而定。
-        self.category = None
+        self.category: Optional[str] = None
 
-        self.briefing = None
-        self.debriefing = None
-        self.comments = None
+        self.briefing: Optional[str] = None
+        self.debriefing: Optional[str] = None
+        self.comments: Optional[str] = None
         self.reference_longitude = 0
         self.reference_latitude = 0
 
@@ -630,7 +630,7 @@ class Acmi:
         self.timeframes: list[float] = []
         # 加载
         # 解析到的object_keys
-        self.object_fields = { 'ID', 'Name', 'Type', 'Tags' }
+        self.object_fields: set[str] = { 'ID', 'Name', 'Type', 'Tags' }
 
         self._parse(filepath=filepath)
 
@@ -645,7 +645,7 @@ class Acmi:
             return datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%SZ")
         else:
             return datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%fZ")
-
+    
     @staticmethod
     def split_fields(line):
         fields = []
