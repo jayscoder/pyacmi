@@ -853,7 +853,7 @@ class Acmi:
     # def export_global_to_json(self, export_filepath: str):
     #     with open(export_filepath, 'w', encoding='utf-8') as f:
     #         json.dump(self.global_json(), f, ensure_ascii=False)
-
+    
     # 导出CSV
     # remove_empty: 是否移除空列，默认移除
     # export_obj_ids: 选择导出的object ID

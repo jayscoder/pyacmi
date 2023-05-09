@@ -21,7 +21,7 @@ $ pip3 install pyacmi
 You can install a specific version of pyacmi by:
 
 ```shell
-$ pip3 install pyacmi==1.1.0
+$ pip3 install pyacmi==1.2.0
 ```
 
 You can upgrade pyacmi to the latest version by:
