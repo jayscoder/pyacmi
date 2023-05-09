@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
         name="pyacmi",
-        version='1.1.1',
+        version='1.2.0',
         description="ACMI flight record file parser",
         long_description=long_description,
         long_description_content_type='text/markdown',
@@ -23,6 +23,6 @@ setup(
             'Programming Language :: Python :: 3 :: Only'
         ],
         keywords='acmi tacview',
-        install_requires=['sortedcontainers'],
+        install_requires=['sortedcontainers', 'tqdm'],
         packages=['pyacmi'],
 )
