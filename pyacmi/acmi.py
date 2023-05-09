@@ -327,7 +327,7 @@ class AcmiFileReader:
             raise StopIteration
 
         while line.strip().endswith('\\'):
-            line = line.strip()[:-1] + '\n' + self.fh.readline().decode(_ACMI_FILE_ENCODING)
+            line = line.strip()[:-1] + '\n' + self.fh.readline()
 
         return line
 
