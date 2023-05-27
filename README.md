@@ -36,7 +36,8 @@ $ pip3 install --upgrade pyacmi
 
 from pyacmi import Acmi
 
-acmi = Acmi('test.acmi')
+acmi = Acmi()
+acmi.load_acmi(filepath='test.acmi')
 print(acmi)
 
 print(acmi.reference_latitude, acmi.reference_longitude, acmi.reference_time)

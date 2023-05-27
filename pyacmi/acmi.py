@@ -12,6 +12,7 @@ from constantly import ValueConstant
 import csv
 from typing import Union, Optional
 from tqdm import tqdm
+import shutil
 
 ACMI_FILE_ENCODING = 'utf-8-sig'
 
@@ -597,8 +598,8 @@ class AcmiFileReader:
 
 class Acmi:
 
-    def __init__(self, filepath: str):
-        self.filepath: Optional[str] = filepath
+    def __init__(self):
+        self.filepath: Optional[str] = None
         self.file_version: Optional[str] = None
         self.file_type: Optional[str] = None
 
@@ -625,14 +626,14 @@ class Acmi:
         self.comments: Optional[str] = None
         self.reference_longitude = 0
         self.reference_latitude = 0
+        self.playback_delay = 0 # 回放文件的延迟时间
 
         self.objects: dict[str, AcmiObject] = { }
         self.timeframes: list[float] = []
+
         # 加载
         # 解析到的object_keys
         self.object_fields: set[str] = { 'ID', 'Name', 'Type', 'Tags' }
-
-        self._parse(filepath=filepath)
 
     @staticmethod
     def parse_obj_id(val: str) -> str:
@@ -645,7 +646,7 @@ class Acmi:
             return datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%SZ")
         else:
             return datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%fZ")
-    
+
     @staticmethod
     def split_fields(line):
         fields = []
@@ -688,8 +689,21 @@ class Acmi:
                 self.debriefing = val
             elif prop == "Comments":
                 self.comments = val
+            elif prop == 'AuthenticationKey':
+                # TODO: 需要整明白这是个啥
+                return
+            elif prop == 'PlaybackDelay':
+                # 指定了回放文件的延迟时间。在这个例子中，PlaybackDelay的值为600.000000，这意味着回放文件将在600秒后开始播放。
+                self.playback_delay = float(val)
+                # TODO: 需要整明白这是个啥
+                return
+            elif prop == 'PlaybackKey':
+                # 回放文件的密钥
+                # TODO: 需要整明白这是个啥
+                return
             else:
-                raise RuntimeError("Unknown global property: " + prop)
+                print("Unknown global property: " + prop)
+                # raise RuntimeError("Unknown global property: " + prop)
 
     # 解析Object Property
     def _parse_object_property(self, obj_id: str, timeframe: float, fields):
@@ -764,11 +778,12 @@ class Acmi:
                 obj.set_value(prop, timeframe, float(val))
             else:
                 obj.set_value(prop, timeframe, val)
-                print("Unknown property:", prop)
+                print("Unknown Object property:", prop)
 
             self.object_fields.add(prop)
 
-    def _parse(self, filepath: str):
+    def load_acmi(self, filepath: str):
+        self.filepath = filepath
 
         def do_parse(f):
             ar = AcmiFileReader(f)
@@ -795,7 +810,10 @@ class Acmi:
                     continue  # ignore comments
 
                 if line.startswith('#'):
-                    cur_reftime = float(line[1:])
+                    try:
+                        cur_reftime = float(line[1:])
+                    except Exception as e:
+                        continue
                     self.timeframes.append(cur_reftime)
                     continue
 
@@ -917,3 +935,26 @@ class Acmi:
                         writer.writerows(lines)
                         lines = []
             writer.writerows(lines)
+
+    # 导出acmi
+    def export_acmi(self, filepath: str):
+        pass
+
+
+# 解压缩acmi到指定目录，如果该acmi不是压缩文件，则复制到指定目录里
+def extract_acmi(filepath: str, to_dir: str):
+    if zipfile.is_zipfile(filepath):
+        with zipfile.ZipFile(filepath, 'r') as zip_ref:
+            zip_ref.extractall(to_dir)
+    else:
+        shutil.copy(filepath, to_dir)
+
+
+# 解压缩文件夹
+def extract_acmi_dir(from_dir: str, to_dir: str):
+    for root, dirs, files in os.walk(from_dir):
+        for file in files:
+            if file.endswith('.acmi') or file.endswith('.zip'):
+                filepath = os.path.join(root, file)
+                print(f'Extract {filepath}')
+                extract_acmi(filepath, to_dir)
